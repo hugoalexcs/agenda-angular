@@ -7,122 +7,125 @@ import { scheduleData } from './data';
 import { L10n, loadCldr, setCulture, setCurrencyCode, extend } from '@syncfusion/ej2-base';
 import {
     EventSettingsModel, EventRenderedArgs, View, DayService, WeekService, WorkWeekService,
-    MonthService, AgendaService, ResizeService, DragAndDropService
+    MonthService, AgendaService, ResizeService, DragAndDropService, GroupModel
   } from '@syncfusion/ej2-angular-schedule';
   import { orderDatas } from './data-locale';
-const  cagregorian =   './ca-gregorian.json';
-const currencies = './currencies.json';
-const numbers = './numbers.json';
-const timeZoneNames = './timeZoneNames.json';
+
+  import * as cagregorian from "./ca-gregorian.json";
+  import * as currencies from "./currencies.json";
+  import * as numbers from "./numbers.json";
+  import * as timeZoneNames from "./timeZoneNames.json";
 //setCulture('fr')
 //setCurrencyCode('BRT');
 
 loadCldr(cagregorian, currencies, numbers, timeZoneNames); // load json files
+//loadCldr(currencies['default'], cagregorian['default'], numbers['default'], timeZoneNames['default']);
 L10n.load({
-  "en": {
-      "schedule": {
-          "day": "Dia",
-          "week": "Semana",
-          "workWeek": "Segunda a Sexta",
-          "month": "Mês",
-          "agenda": "Agenda",
-          "weekAgenda": "Agenda da Semana",
-          "workWeekAgenda": "Work Week Agenda",
-          "monthAgenda": "Month Agenda",
-          "today": "Hoje",
-          "noEvents": "No events",
-          "emptyContainer": "There are no events scheduled on this day.",
-          "allDay": "All day",
-          "start": "Start",
-          "end": "End",
-          "more": "more",
-          "close": "Close",
-          "cancel": "Cancel",
-          "noTitle": "(No Title)",
-          "delete": "Delete",
-          "deleteEvent": "Delete Event",
-          "deleteMultipleEvent": "Delete Multiple Events",
-          "selectedItems": "Items selected",
-          "deleteSeries": "Delete Series",
-          "edit": "Edit",
-          "editSeries": "Edit Series",
-          "editEvent": "Edit Event",
-          "createEvent": "Create",
-          "subject": "Subject",
-          "addTitle": "Add title",
-          "moreDetails": "More Details",
-          "save": "Save",
-          "editContent": "Do you want to edit only this event or entire series?",
-          "deleteRecurrenceContent": "Do you want to delete only this event or entire series?",
-          "deleteContent": "Are you sure you want to delete this event?",
-          "deleteMultipleContent": "Are you sure you want to delete the selected events?",
-          "newEvent": "New Event",
-          "title": "Title",
-          "location": "Location",
-          "description": "Description",
-          "timezone": "Timezone",
-          "startTimezone": "Start Timezone",
-          "endTimezone": "End Timezone",
-          "repeat": "Repeat",
-          "saveButton": "Save",
-          "cancelButton": "Cancel",
-          "deleteButton": "Delete",
-          "recurrence": "Recurrence",
-          "wrongPattern": "The recurrence pattern is not valid.",
-          "seriesChangeAlert": "The changes made to specific instances of this series will be cancelled and those events will match the series again.",
-          "createError": "The duration of the event must be shorter than how frequently it occurs. Shorten the duration, or change the recurrence pattern in the recurrence event editor.",
-          "recurrenceDateValidation": "Some months have fewer than the selected date. For these months, the occurrence will fall on the last date of the month.",
-          "sameDayAlert": "Two occurrences of the same event cannot occur on the same day.",
-          "editRecurrence": "Edit Recurrence",
-          "repeats": "Repeats",
-          "alert": "Alert",
-          "startEndError": "The selected end date occurs before the start date.",
-          "invalidDateError": "The entered date value is invalid.",
-          "ok": "Ok",
-          "occurrence": "Occurrence",
-          "series": "Series",
-          "previous": "Previous",
-          "next": "Next",
-          "timelineDay": "Timeline Day",
-          "timelineWeek": "Timeline Week",
-          "timelineWorkWeek": "Timeline Work Week",
-          "timelineMonth": "Timeline Month"
-      },
-      "recurrenceeditor": {
-          "none": "None",
-          "daily": "Daily",
-          "weekly": "Weekly",
-          "monthly": "Monthly",
-          "month": "Month",
-          "yearly": "Yearly",
-          "never": "Never",
-          "until": "Until",
-          "count": "Count",
-          "first": "First",
-          "second": "Second",
-          "third": "Third",
-          "fourth": "Fourth",
-          "last": "Last",
-          "repeat": "Repeat",
-          "repeatEvery": "Repeat Every",
-          "on": "Repeat On",
-          "end": "End",
-          "onDay": "Day",
-          "days": "Day(s)",
-          "weeks": "Week(s)",
-          "months": "Month(s)",
-          "years": "Year(s)",
-          "every": "every",
-          "summaryTimes": "time(s)",
-          "summaryOn": "on",
-          "summaryUntil": "until",
-          "summaryRepeat": "Repeats",
-          "summaryDay": "day(s)",
-          "summaryWeek": "week(s)",
-          "summaryMonth": "month(s)",
-          "summaryYear": "year(s)"
-      }
-}});
+  'en': {
+    'schedule': {
+      'day': 'dia',
+      'week': 'semana',
+      'workWeek': 'Semana de trabalho',
+      'month': 'Mês',
+      'agenda': 'Agenda',
+      'weekAgenda': 'Agenda de da semana',
+      'workWeekAgenda': 'Agenda da Semana de Trabalho',
+      'monthAgenda': 'Agenda do mês',
+      'today': 'Hoje',
+      'noEvents': 'Sem eventos',
+      'allDay': 'Todo o dia',
+      'start': 'Início',
+      'end': 'Fim',
+      'more': 'Mais',
+      'close': 'Fechar',
+      'cancel': 'Cancelar',
+      'noTitle': '(Sem título)',
+      'delete': 'Apagar',
+      'deleteEvent': 'Excluir evento',
+      'selectedItems': 'Ítens selecionados',
+      'deleteSeries': 'Apagar série',
+      'edit': 'Editar',
+      'editSeries': 'Editar série',
+      'editEvent': 'Editar evento',
+      'createEvent': 'Criar',
+      'subject': 'Assunto',
+      'addTitle': 'Adicionar título',
+      'moreDetails': 'Mais detalles',
+      'save': 'Salvar',
+      'editContent': 'Deseja editar apenas este evento ou toda a série?',
+      'deleteRecurrenceContent': 'Deseja eliminar só este evento ou toda a série?',
+      'deleteContent': 'Tem certeza que deseja apagar este evento?',
+      'newEvent': 'Novo evento',
+      'title': 'Título',
+      'location': 'Localização',
+      'description': 'Descrição',
+      'timezone': 'Time Zone',
+      'startTimezone': 'Hora inicial',
+      'endTimezone': 'Hora final',
+      'repeat': 'Repetir',
+      'saveButton': 'Salvar',
+      'cancelButton': 'Cancelar',
+      'deleteButton': 'Apagar',
+      'recurrence': 'Recorrência',
+      'editRecurrence': 'Editar recorrência',
+      'repeats': 'Repete',
+      'alert': 'Alerta',
+      'startEndError': 'A data de finalização selecionada ocorre antes da da de início.',
+      'invalidDateError': 'O valor da data é invalida.',
+      'ok': 'Confirmar',
+      'occurrence': 'Výskyt',
+      'series': 'Série',
+      'previous': 'Anterior',
+      'next': 'Próximo',
+      'timelineDay': 'Alocação de Hoje',
+      'timelineWeek': 'Alocação Semanal',
+      'timelineWorkWeek': 'Alocação do trabalho semanal',
+      'timelineMonth': 'Alocação mensal'
+    },
+    'recurrenceeditor': {
+      'none': 'Nenhum',
+      'daily': 'Diário',
+      'weekly': 'Semanal',
+      'monthly': 'Mensal',
+      'month': 'Mês',
+      'yearly': 'Anual',
+      'never': 'Nunca',
+      'until': 'Até',
+      'count': 'Contar',
+      'first': 'Primeiro',
+      'second': 'Segundo',
+      'third': 'Tercero',
+      'fourth': 'Quarto',
+      'last': 'Último',
+      'repeat': 'Repetir',
+      'repeatEvery': 'Repita cada',
+      'on': 'Repita en',
+      'end': 'Fim',
+      'onDay': 'Dia',
+      'days': 'Dias)',
+      'weeks': 'Semanas)',
+      'months': 'Meses)',
+      'years': 'Anos)',
+      'every': 'cada',
+      'summaryTimes': 'vecês)',
+      'summaryOn': 'em',
+      'summaryUntil': 'até',
+      'summaryRepeat': 'Repita',
+      'summaryDay': 'dias)',
+      'summaryWeek': 'semanas)',
+      'summaryMonth': 'meses)',
+      'summaryYear': 'anos)',
+      'monthWeek': 'Měsíční týden',
+      'monthPosition': 'Pozice měsíce',
+      'monthExpander': 'Expander měsíce',
+      'yearExpander': 'Rok Expander',
+      'repeatInterval': 'Interval opakování'
+    },
+    'calendar': {
+      'today': 'Hoje'
+    }
+  }
+});
 
 @Component({
     selector: 'app-root',
@@ -152,12 +155,34 @@ export class AppComponent  implements OnInit  {
   //locale='pt-Br' 
   public formatoptions: Object;
   public cultureChange = false;
+  
+  public group: GroupModel = {
+    resources: ['Projects', 'Categories']
+  };
+  public projectDataSource: Object[] = [
+    {text: 'PROJECT 1', id: 1, color: '#cb6bb2'},
+    {text: 'PROJECT 2', id: 2, color: '#56ca85'},
+    {text: 'PROJECT 3', id: 3, color: '#df5286'}
+  ];
+  public categoryDataSource: Object[] = [
+    {text: 'Nancy', id: 1, groupId: 1, color: '#df5286'},
+    {text: 'Steven', id: 2, groupId: 1, color: '#7fa900'},
+    {text: 'Robert', id: 3, groupId: 2, color: '#ea7a57'},
+    {text: 'Smith', id: 4, groupId: 2, color: '#5978ee'},
+    {text: 'Micheal', id: 5, groupId: 3, color: '#df5286'},
+    {text: 'Root', id: 6, groupId: 3, color: '#00bdae'}
+  ];
+  public allowMultiple: Boolean = true;
+/*   public eventSettings: EventSettingsModel = {
+    dataSource: extend([], resourceData.concat(timelineResourceData), null, true) as Object[]
+  };
+ */
   ngOnInit(): void {
     this.data = orderDatas;
     this.formatoptions = { type: 'dateTime', format: 'M/d/y' }
 
     this.cultureChange = true;
-    setCulture('pt'); // Change the Grid culture
+    //setCulture('pt'); // Change the Grid culture
    setCurrencyCode('BRL');// Change the currency code
 
   }

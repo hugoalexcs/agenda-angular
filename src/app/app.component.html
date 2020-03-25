@@ -4,8 +4,29 @@
       [views]='views' locale='en'
           (eventRendered)="oneventRendered($event)" (created)="onCreate($event)" (actionBegin)="onActionBegin($event)" (actionComplete)="onActionComplete($event)"
           (actionFailure)="onActionFailure($event)" (cellClick)="onCellClick($event)" (cellDoubleClick)="onCellDoubleClick($event)" (destroyed)="onDestroyed($event)"
-          (navigating)="onNavigating($event)" (eventClick)="onEventClick($event)" (popupOpen)="onPopupOpen($event)">
-      </ejs-schedule>
+          (navigating)="onNavigating($event)" (eventClick)="onEventClick($event)" (popupOpen)="onPopupOpen($event)"
+          
+          
+          >
+        
+           <e-resources>
+            <e-resource field='ProjectId' title='Choose Project' [dataSource]='projectDataSource'
+                        [allowMultiple]='allowMultiple' name='Projects'
+                        textField='text' idField='id' colorField='color'>
+            </e-resource>
+            <e-resource field='TaskId' title='Category' [dataSource]='categoryDataSource' [allowMultiple]='allowMultiple'
+                        name='Categories'
+                        textField='text' idField='id' groupIDField='groupId' colorField='color'>
+            </e-resource>
+        </e-resources> 
+  <!--  <e-views>
+            <e-view option="TimelineDay"></e-view>
+            <e-view option="TimelineWeek"></e-view>
+            <e-view option="TimelineWorkWeek"></e-view>
+            <e-view option="TimelineMonth"></e-view>
+            <e-view option="Agenda"></e-view>
+        </e-views> -->
+        </ejs-schedule>
   </div>
   <div class="col-lg-3 property-section">
       <div class="property-panel-section">
