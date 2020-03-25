@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~9.0.0",
     "@angular/router": "~9.0.0",
     "@syncfusion/ej2-angular-schedule": "^17.4.55",
+    "cldr-data": "^36.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
